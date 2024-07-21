@@ -1,0 +1,183 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f2f5;
+  margin: 0;
+  height: 100vh; /* Ensure the body takes the full viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Full width */
+  height: 100vh; /* Full height */
+  padding: 20px; /* Optional: Padding around the container */
+  box-sizing: border-box;
+}
+
+.signup-container {
+  max-width: 90%; /* Use 90% width for responsiveness */
+  width: 400px; /* Fallback width */
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column; /* Ensure the content inside is displayed correctly */
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 5px;
+  color: #333;
+}
+
+input, button, select {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #007BFF;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: none;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+input[type="file"] {
+  padding: 10px 0;
+}
+
+.avatar-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.scroll-btn {
+  background-color: #007BFF;
+  color: white;
+  padding: 12px;
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.scroll-btn:hover {
+  background-color: #69b4ff;
+}
+
+.avatar-scroll {
+  overflow-x: auto;
+  white-space: nowrap;
+  width: 80%;
+  margin: 0 10px;
+  padding: 10px;
+  background-color: transparent;
+}
+
+.avatar-images {
+  display: inline-flex;
+  gap: 10px;
+}
+
+.avatar-images img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.avatar-images img:hover {
+  transform: scale(1.1);
+}
+
+.avatar-images img.selected {
+  border: 2px solid #007BFF;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 85%; /* Reduce width for tablets */
+    padding: 15px;
+  }
+
+  .scroll-btn {
+    width: 35px;
+    height: 35px;
+    padding: 10px;
+  }
+
+  input, button, select {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 100%; /* Full width on small screens */
+    padding: 10px;
+  }
+
+  .scroll-btn {
+    width: 30px;
+    height: 30px;
+    padding: 8px;
+  }
+
+  input, button, select {
+    font-size: 14px;
+  }
+
+  .avatar-images img {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    padding: 5px; /* Reduce padding for very small screens */
+  }
+
+  input, button, select {
+    font-size: 12px; /* Smaller font size */
+  }
+
+  .avatar-images img {
+    width: 40px;
+    height: 40px; /* Smaller avatar size */
+  }
+}

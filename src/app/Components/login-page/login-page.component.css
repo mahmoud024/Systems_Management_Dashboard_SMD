@@ -1,0 +1,100 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f2f5;
+  margin: 0;
+  height: 100vh; /* Ensure the body takes the full viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Full width */
+  height: 100vh; /* Full height */
+  padding: 20px; /* Optional: Padding around the container */
+  box-sizing: border-box;
+}
+
+.login-container {
+  max-width: 90%; /* Use a percentage for better responsiveness */
+  width: 400px; /* Fallback width */
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column; /* Ensure the content inside is displayed correctly */
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 5px;
+  color: #333;
+}
+
+input, button, select {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 100%; /* Full width */
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #007BFF;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: none;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+p {
+  text-align: center;
+  margin-top: 10px;
+}
+
+a {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 95%; /* Adjust width for smaller screens */
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 100%; /* Full width on very small screens */
+    padding: 10px;
+  }
+
+  input, button, select {
+    font-size: 14px; /* Smaller font size */
+  }
+}

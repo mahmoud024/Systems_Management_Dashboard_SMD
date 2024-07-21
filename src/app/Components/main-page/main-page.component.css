@@ -1,0 +1,391 @@
+
+/* Reset and base styles */
+body {
+  font-family: "Arial Black", sans-serif;
+  background-color: #f0f2f5;
+  overflow-x: hidden;
+}
+
+/* User profile and popup */
+.user-profile {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.profile-image {
+  width: 40px;
+  padding: 3px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #007BFF;
+}
+
+.profile-popup {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 235px;
+  padding: 20px;
+  text-align: center;
+  z-index: 1000;
+}
+
+.profile-popup *ngIf {
+  display: block;
+}
+
+.profile-popup .profile-image-large {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.profile-popup .user-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.profile-popup .user-email {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.profile-popup .logout-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.profile-popup .logout-button:hover {
+  background-color: #c82333;
+}
+
+/* Sidebar */
+.sidebar {
+  margin-top: -10px;
+  margin-left: -10px;
+  width: 300px;
+  background-color: #b4bfca;
+  color: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+  position: fixed;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+}
+
+.title {
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #505050;
+}
+
+.now-used {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  color: #505050;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.green-circle {
+  width: 30px;
+  height: 10px;
+  background-color: #00ff3c;
+  border-radius: 10%;
+  margin-right: 10px;
+  margin-left: 10px;
+  color: #505050;
+}
+
+.white-circle {
+  width: 30px;
+  height: 10px;
+  background-color: white;
+  border-radius: 10%;
+  margin-right: 10px;
+  margin-left: 40px;
+  color: #505050;
+}
+
+.system-cards {
+  margin-top: 20px;
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 7px;
+}
+
+.system-cards::-webkit-scrollbar {
+  width: 8px;
+}
+
+.system-cards::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.system-cards::-webkit-scrollbar-thumb {
+  background-color: #929ba5;
+  border-radius: 4px;
+}
+
+.card {
+  padding: 12px;
+  margin-bottom: 15px;
+  background-color: white;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  cursor: pointer;
+  color: black;
+  transition: background-color 0.6s ease, transform 0.1s ease;
+}
+
+.card:hover {
+  background-color: #dfdfdf;
+  transform: translateY(5px);
+}
+
+.card.selected {
+  background-color: #00ff3c;
+  color: black;
+}
+
+/* Main content */
+.main-content {
+  margin-left: 300px;
+  padding: 20px;
+  flex: 1;
+  margin-top: 0; /* Ensure no margin on top */
+}
+
+h2 {
+  margin-top: 0px;
+  margin-bottom: 40px;
+  text-align: center;
+  color: #505050;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+input, button {
+  flex: 1 1 200px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+input:focus, button:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+
+button {
+  background-color: #007BFF;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.table-container {
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+thead {
+  background-color: #007BFF;
+  color: #fff;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+td button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
+
+
+
+.search-container {
+  position: relative;
+  margin-bottom: 19px;
+}
+
+.search-box {
+  height: 100%;
+  width: 79%;
+  padding: 5px 10px 5px 30px; /* Adjust padding to make space for the icon */
+  border-radius: 12px;
+  font-size: 16px;
+  color: #333;
+  transition: border-color 0.3s;
+}
+
+.search-box:focus {
+  border-color: #0056b3;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 70%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #969696;
+}
+
+
+
+/*.search-container {*/
+/*  max-height: 4%;*/
+/*  max-width: 86%;*/
+/*  padding: 5px 10px; !* Reduced padding *!*/
+/*  border-radius: 15px;*/
+/*  margin-bottom: 15px; !* Reduced margin *!*/
+/*  font-size: 14px; !* Smaller font size *!*/
+/*  color: #333;*/
+/*  transition: border-color 0.3s;*/
+/*}*/
+
+/*.search-container:focus {*/
+/*  border-color: #0056b3;*/
+/*  outline: none;*/
+/*  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);*/
+/*}*/
+
+
+
+
+td button:hover {
+  opacity: 0.8;
+}
+
+td button:first-child {
+  background-color: #28a745;
+  color: #fff;
+  margin-right: 5px;
+}
+
+td button:last-child {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    padding-top: 20px; /* Ensure some space at the top */
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    z-index: 100;
+  }
+
+  .user-profile {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin-bottom: 20px;
+  }
+
+  th, td {
+    padding: 8px 10px;
+  }
+
+  td button {
+    padding: 4px 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  form {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  input, button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  th, td {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+  }
+
+  th, td:not(:last-child) {
+    border-bottom: 1px solid #ddd;
+  }
+
+  tr {
+    display: block;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  td button {
+    width: 100%;
+    margin: 5px 0;
+  }
+}

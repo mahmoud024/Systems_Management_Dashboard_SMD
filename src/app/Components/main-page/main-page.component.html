@@ -1,0 +1,77 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<div class="user-profile" (click)="toggleProfilePopup()">
+  <img [src]="userProfile.avatar" alt="User Profile" class="profile-image" id="profileImage">
+  <div class="profile-popup" id="profilePopup" *ngIf="showProfilePopup">
+    <img [src]="userProfile.avatar" alt="User Profile" class="profile-image-large">
+    <p class="user-name">{{ userProfile.username }}</p>
+    <p class="user-email">{{ userProfile.email }}</p>
+    <button class="logout-button" (click)="logout($event)">Logout</button>
+  </div>
+</div>
+
+<div class="sidebar">
+  <div class="title">
+    <span>Servers</span>
+    <hr>
+  </div>
+
+  <div class="now-used">
+    <div class="green-circle"></div>
+    <span>Now Used</span>
+    <div class="white-circle"></div>
+    <span>Not Used</span>
+  </div>
+
+  <div class="search-container">
+    <i class="fas fa-search search-icon"></i>
+    <input
+      type="text"
+      placeholder="Search Servers"
+      [(ngModel)]="searchQuery"
+      (input)="onSearchChange()"
+      class="search-box"
+    />
+  </div>
+
+  <div class="system-cards">
+    <div class="card" *ngFor="let server of filteredServers" (click)="selectServer(server)">{{ server }}</div>
+  </div>
+</div>
+
+<div class="main-content">
+  <h2>Systems Management Dashboard SMD</h2>
+  <form id="entryForm">
+    <input
+      type="text"
+      id="systemName"
+      placeholder="System Name"
+      [(ngModel)]="selectedServer"
+      name="systemName"
+      required
+      readonly
+    >
+    <input type="text" id="version" placeholder="Version" required readonly>
+    <input type="datetime-local" id="dateFrom" required>
+    <input type="datetime-local" id="dateTo" required>
+    <button type="submit">Reserve</button>
+  </form>
+  <div class="table-container">
+    <table id="dynamicTable">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>System Name</th>
+        <th>Version</th>
+        <th>Date From</th>
+        <th>Date To</th>
+        <th>Reserved By</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <!-- Rows will be added here dynamically -->
+      </tbody>
+    </table>
+  </div>
+</div>
