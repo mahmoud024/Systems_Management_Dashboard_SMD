@@ -1,24 +1,58 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 <div class="main-container">
   <div class="signup-container">
-    <form id="signupForm" class="form" (ngSubmit)="onSubmit()" #form="ngForm">
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
       <h2 style="text-align: center">Sign Up</h2>
       <div class="form-group">
         <label for="username">Full Name</label>
-        <input type="text" id="username" name="username" [(ngModel)]="username" required>
+        <input type="text" id="username" formControlName="username" required>
+        <div *ngIf="signupForm.get('username').invalid && (signupForm.get('username').dirty || signupForm.get('username').touched)" class="error-message" style="color: red ; font-size: 12px; margin-top: 5px ; margin-left: 3px">
+          Full Name is required.
+        </div>
       </div>
+
       <div class="form-group">
         <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" [(ngModel)]="email" required>
+        <input
+                type="email"
+                id="email"
+                formControlName="email"
+                placeholder="example@hp.com"
+                required>
+        <div *ngIf="signupForm.get('email').invalid && (signupForm.get('email').dirty || signupForm.get('email').touched)" class="error-message">
+          <div *ngIf="signupForm.get('email').errors?.required" style="color: red ; font-size: 12px; margin-top: 3px ; margin-left: 3px">Email is required.</div>
+          <div *ngIf="signupForm.get('email').errors?.email || signupForm.get('email').errors?.hpEmail" style="color: red ; font-size: 12px; margin-top: 5px ; margin-left: 3px">Invalid email format, Email must end with @hp.com.</div>
+        </div>
       </div>
+
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" [(ngModel)]="password" required>
+        <div class="password-container">
+          <input [type]="passwordFieldType" id="password" formControlName="password" required>
+          <i class="fa" [ngClass]="passwordVisible ? 'fa-eye-slash' : 'fa-eye'" (click)="togglePasswordVisibility()"></i>
+        </div>
+        <div *ngIf="signupForm.get('password').invalid && (signupForm.get('password').dirty || signupForm.get('password').touched)" class="error-message" style="color: red ; font-size: 12px; margin-top: 5px ; margin-left: 3px">
+          Password is required and must be at least 5 characters long.
+        </div>
       </div>
+
       <div class="form-group">
         <label for="confirmPassword">Confirm Password</label>
-        <input type="password" id="confirmPassword" name="confirmPassword" required>
+        <div class="password-container">
+          <input [type]="confirmPasswordFieldType" id="confirmPassword" formControlName="confirmPassword" required>
+          <i class="fa" [ngClass]="confirmPasswordVisible ? 'fa-eye-slash' : 'fa-eye'" (click)="toggleConfirmPasswordVisibility()"></i>
+        </div>
+        <div *ngIf="signupForm.get('confirmPassword').invalid && (signupForm.get('confirmPassword').dirty || signupForm.get('confirmPassword').touched)" class="error-message" style="color: red ; font-size: 12px; margin-top: 5px ; margin-left: 3px">
+          Confirm Password is required.
+        </div>
+        <div *ngIf="signupForm.errors?.passwordMismatch" class="error-message" style="color: red ; font-size: 12px; margin-top: 5px ; margin-left: 3px">
+          Passwords must match.
+        </div>
       </div>
+
       <div class="form-group">
+        <label>Select Avatar:</label>
         <div class="avatar-container">
           <button type="button" class="scroll-btn" (click)="scrollLeft()">&lt;</button>
           <div class="avatar-scroll" #avatarScroll>
@@ -30,9 +64,14 @@
           </div>
           <button type="button" class="scroll-btn" (click)="scrollRight()">&gt;</button>
         </div>
+        <!-- Error message display -->
+        <div *ngIf="signupForm.get('avatar').invalid && signupForm.get('avatar').touched" class="error-message" style="color: red ; font-size: 12px; margin-top: 5px ; margin-left: 3px">
+          Avatar is required.
+        </div>
       </div>
+
       <div class="form-group">
-        <button type="submit">Sign Up</button>
+        <button type="submit" [disabled]="signupForm.invalid">Sign Up</button>
       </div>
       <div class="form-group">
         <p style="text-align: center">Already have an account? <a routerLink="/login">Login</a></p>

@@ -55,6 +55,7 @@ input, button, select {
   box-sizing: border-box;
 }
 
+/* Style for the login button */
 button {
   background-color: #007BFF;
   color: #fff;
@@ -66,6 +67,62 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.password-container {
+  position: relative;
+}
+
+.password-container .fa {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+
+/* Style for the disabled state */
+button:disabled {
+  cursor: not-allowed; /* Change cursor to indicate button is disabled */
+  opacity: 0.6; /* Slightly fade the button to indicate it's disabled */
+}
+
+/* Optional: Hover effect for the button when it's enabled */
+button:not(:disabled):hover {
+  background-color: #0056b3; /* Darker background color for hover effect */
+  color: white; /* Change text color on hover */
+}
+
+/* Style for password container and eye icon */
+.password-container {
+  position: relative;
+}
+
+.password-container input {
+  padding-right: 30px; /* Space for the eye icon */
+}
+
+.password-container .fa {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+/* Style for error messages */
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
 
 p {
   text-align: center;

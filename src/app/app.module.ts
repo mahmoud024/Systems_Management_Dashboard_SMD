@@ -7,22 +7,28 @@ import { AppComponent } from './app.component';
 import { MainPageComponent } from './Components/main-page/main-page.component';
 import { SignupPageComponent } from './Components/signup-page/signup-page.component';
 import { LoginPageComponent } from './Components/login-page/login-page.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {ReservationService} from "./services/reservation.service";
+import {authGuard} from "./auth.guard";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
     AppComponent,
     MainPageComponent,
     SignupPageComponent,
-    LoginPageComponent
+    LoginPageComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+
   ],
-  providers: [],
+  providers: [ReservationService,authGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

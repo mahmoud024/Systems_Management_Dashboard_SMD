@@ -2,7 +2,7 @@
 
 <div class="user-profile" (click)="toggleProfilePopup()">
   <img [src]="userProfile.avatar" alt="User Profile" class="profile-image" id="profileImage">
-  <div class="profile-popup" id="profilePopup" *ngIf="showProfilePopup">
+  <div class="profile-popup" id="profilePopup" *ngIf="showProfilePopup" [@popupAnimation]>
     <img [src]="userProfile.avatar" alt="User Profile" class="profile-image-large">
     <p class="user-name">{{ userProfile.username }}</p>
     <p class="user-email">{{ userProfile.email }}</p>
@@ -29,49 +29,140 @@
       type="text"
       placeholder="Search Servers"
       [(ngModel)]="searchQuery"
-      (input)="onSearchChange()"
+      (ngModelChange)="onSearchChange()"
       class="search-box"
     />
   </div>
 
   <div class="system-cards">
-    <div class="card" *ngFor="let server of filteredServers" (click)="selectServer(server)">{{ server }}</div>
+    <div class="card" *ngFor="let server of filteredServers" [class.reserved]="isServerReserved(server.id)" (click)="selectServer(server)">
+      <div class="server-name">{{ server.name }}</div>
+      <hr>
+      <div class="server-ip">Server IP: {{ server.ip_address }}</div>
+      <div class="server-location">Location: {{ server.location }}</div>
+      <div class="server-location">Version: {{ server.version }}</div>
+      <div class="card-inner" [@toggleHeight]="expandedState === server.id ? 'expanded' : 'collapsed'">
+        <div class="icon-container">
+          <i class="fa-solid fa-ellipsis" style="font-size: 18px" (click)="toggleCard(server.id, $event)"></i>
+        </div>
+        <div *ngIf="expandedState === server.id" class="card-actions">
+          <div>
+            <button class="action-button1" (click)="openUpdatePopup(server)">Update Server</button>
+          </div>
+          <div>
+            <button class="action-button2" (click)="deleteServer(server.id)">Delete Server</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="update-server-popup" *ngIf="showUpdateServerPopup">
+  <div class="popup-content" [@popupAnimation2]>
+    <h3>Update Server</h3>
+    <form (submit)="updateServer($event)">
+      <div>
+        <label for="updateServerName">Server Name</label>
+        <input
+                type="text"
+                id="updateServerName"
+                [(ngModel)]="selectedServerForUpdate.name"
+                name="updateServerName"
+                required
+        />
+      </div>
+
+      <div>
+        <label for="updateServerIp">Server IP</label>
+        <input
+                type="text"
+                id="updateServerIp"
+                [(ngModel)]="selectedServerForUpdate.ip_address"
+                name="updateServerIp"
+                required
+        />
+      </div>
+
+      <div>
+        <label for="updateServerLocation">Location</label>
+        <input
+                type="text"
+                id="updateServerLocation"
+                [(ngModel)]="selectedServerForUpdate.location"
+                name="updateServerLocation"
+                required
+        />
+      </div>
+
+      <div class="button-row">
+        <button type="submit" class="save">Save Changes</button>
+        <button type="button" class="cancel" (click)="closeUpdatePopup()">Cancel</button>
+      </div>
+    </form>
   </div>
 </div>
 
 <div class="main-content">
   <h2>Systems Management Dashboard SMD</h2>
-  <form id="entryForm">
+  <form id="entryForm" (submit)="reserveServer($event)">
     <input
-      type="text"
+      [ngModel]="selectedServer?.name"
       id="systemName"
-      placeholder="System Name"
-      [(ngModel)]="selectedServer"
       name="systemName"
-      required
+      placeholder="System Name"
       readonly
-    >
-    <input type="text" id="version" placeholder="Version" required readonly>
-    <input type="datetime-local" id="dateFrom" required>
-    <input type="datetime-local" id="dateTo" required>
+      required
+      type="text"
+    />
+    <input
+      [ngModel]="selectedServer?.location"
+      id="location"
+      name="location"
+      placeholder="Location"
+      readonly
+      required
+      type="text"
+    />
+    <input type="datetime-local" id="dateFrom" required />
+    <input type="datetime-local" id="dateTo" required />
     <button type="submit">Reserve</button>
   </form>
+
+
   <div class="table-container">
-    <table id="dynamicTable">
-      <thead>
-      <tr>
-        <th>ID</th>
-        <th>System Name</th>
-        <th>Version</th>
-        <th>Date From</th>
-        <th>Date To</th>
-        <th>Reserved By</th>
-        <th>Actions</th>
-      </tr>
-      </thead>
-      <tbody>
-      <!-- Rows will be added here dynamically -->
-      </tbody>
-    </table>
+    <div class="table-wrapper">
+      <table id="dynamicTable">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>System Name</th>
+          <th>Location</th>
+          <th>Date From</th>
+          <th>Date To</th>
+          <th>Reserved By</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let reservation of reservations">
+          <td>{{ reservation.id }}</td>
+          <td>{{ reservation.server_name }}</td>
+          <td>{{ reservation.location }}</td>
+          <td>{{ formatDate(reservation.reservation_from_date) }}</td>
+          <td>{{ formatDate(reservation.reservation_to_date) }}</td>
+          <td>{{ reservation.username }}</td>
+          <td>
+            <button (click)="deleteReservation(reservation.id)" *ngIf="reservation.user_id === userProfile.id">Delete</button>
+            <button (click)="renewReservation(reservation)" *ngIf="reservation.user_id === userProfile.id">Renew</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
+
+
+
+
 </div>
